@@ -29,7 +29,7 @@ header.vrh img{width:30px;height:30px;display:block}
 header.vrh .ime{font-family:var(--ff-display);font-weight:800;letter-spacing:-.02em;font-size:1.1rem}
 header.vrh nav{margin-left:auto;display:flex;gap:18px;font-size:.92rem}
 
-main{padding-block:44px 64px}
+main.wrap{padding-block:46px 70px}
 h1{font-family:var(--ff-display);font-weight:800;letter-spacing:-.025em;
    font-size:clamp(1.9rem,4.4vw,2.7rem);line-height:1.08;margin:0 0 8px}
 .uvod{color:var(--fg-muted);margin:0 0 6px}

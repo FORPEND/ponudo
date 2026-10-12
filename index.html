@@ -9,16 +9,63 @@
 <meta property="og:type" content="website">
 <link rel="icon" href="znak.svg">
 <title>PONUDO AI</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Figtree:wght@400;500;600&family=Outfit:wght@600;700;800&display=swap">
 
 <style>
+/* Fontovi se poslužuju s ove stranice — ništa se ne traži od Googlea ni bilo koga drugog. */
+@font-face{font-family:'Figtree';font-style:normal;font-weight:400;font-display:swap;
+src:url(figtree-latin-ext-400-normal.woff2) format('woff2');
+unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Figtree';font-style:normal;font-weight:400;font-display:swap;
+src:url(figtree-latin-400-normal.woff2) format('woff2');
+unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Figtree';font-style:normal;font-weight:500;font-display:swap;
+src:url(figtree-latin-ext-500-normal.woff2) format('woff2');
+unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Figtree';font-style:normal;font-weight:500;font-display:swap;
+src:url(figtree-latin-500-normal.woff2) format('woff2');
+unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Figtree';font-style:normal;font-weight:600;font-display:swap;
+src:url(figtree-latin-ext-600-normal.woff2) format('woff2');
+unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Figtree';font-style:normal;font-weight:600;font-display:swap;
+src:url(figtree-latin-600-normal.woff2) format('woff2');
+unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Outfit';font-style:normal;font-weight:600;font-display:swap;
+src:url(outfit-latin-ext-600-normal.woff2) format('woff2');
+unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Outfit';font-style:normal;font-weight:600;font-display:swap;
+src:url(outfit-latin-600-normal.woff2) format('woff2');
+unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Outfit';font-style:normal;font-weight:700;font-display:swap;
+src:url(outfit-latin-ext-700-normal.woff2) format('woff2');
+unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Outfit';font-style:normal;font-weight:700;font-display:swap;
+src:url(outfit-latin-700-normal.woff2) format('woff2');
+unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Outfit';font-style:normal;font-weight:800;font-display:swap;
+src:url(outfit-latin-ext-800-normal.woff2) format('woff2');
+unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Outfit';font-style:normal;font-weight:800;font-display:swap;
+src:url(outfit-latin-800-normal.woff2) format('woff2');
+unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'DM Mono';font-style:normal;font-weight:400;font-display:swap;
+src:url(dm-mono-latin-ext-400-normal.woff2) format('woff2');
+unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'DM Mono';font-style:normal;font-weight:400;font-display:swap;
+src:url(dm-mono-latin-400-normal.woff2) format('woff2');
+unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'DM Mono';font-style:normal;font-weight:500;font-display:swap;
+src:url(dm-mono-latin-ext-500-normal.woff2) format('woff2');
+unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'DM Mono';font-style:normal;font-weight:500;font-display:swap;
+src:url(dm-mono-latin-500-normal.woff2) format('woff2');
+unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+
 /* Layout: wide two-column opener on sand paper, then a single reading column.
    Sand ground, deep slate ink, one blue accent. No gold, no hairline boxes. */
 :root{
   --bg:#EFEBE3; --surface:#FBF9F5; --surface-2:#E5DFD4;
-  --fg:#16202B; --fg-muted:#6C6A63;
+  --fg:#16202B; --fg-muted:#625F58;
   --line:#DBD4C7; --line-strong:#C2B9A8;
   --accent:#2B5F9E; --accent-2:#1E4876; --accent-ink:#FFFFFF; --accent-soft:#E3EAF4;
   --wash:rgba(43,95,158,.09);
@@ -142,7 +189,10 @@ td.d{font-family:var(--ff-mono);font-variant-numeric:tabular-nums;color:var(--ac
 
 footer{border-top:1px solid var(--line);background:var(--surface)}
 footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-block:28px}
-footer p{font-size:.87rem;color:var(--fg-muted)}
+footer p{font-size:.87rem;color:var(--fg-muted);margin:0}
+footer a{color:var(--accent)}
+footer .pravno{text-align:right}
+@media (max-width:640px){footer .pravno{text-align:left}}
 footer b{font-family:var(--ff-display);font-weight:600;color:var(--fg)}
 
 @media (max-width:860px){ .hero .wrap{grid-template-columns:1fr} }
@@ -194,7 +244,7 @@ footer b{font-family:var(--ff-display);font-weight:600;color:var(--fg)}
       </div>
     </div>
     <figure>
-      <video src="promo.mp4" poster="media/poster.jpg" controls playsinline preload="metadata"></video>
+      <video src="promo.mp4" poster="poster.jpg" controls playsinline preload="metadata"></video>
       <figcaption>Pravi posao: kupaonica, 31 m² keramike, treći kat bez lifta, 27 km od baze.</figcaption>
     </figure>
   </div>
@@ -365,8 +415,10 @@ footer b{font-family:var(--ff-display);font-weight:600;color:var(--fg)}
 
 <footer>
   <div class="wrap">
-    <p><b>Čičak Bau d.o.o.</b> · Samobor</p>
-    <p>PONUDO AI · program za izradu građevinskih ponuda</p>
+    <p><b>ČIČAK BAU d.o.o.</b> · Samobor, Hrvatska<br>
+       <a href="mailto:cicakbauinfo@gmail.com">cicakbauinfo@gmail.com</a> · <a href="tel:+385953738097">+385 95 373 8097</a></p>
+    <p class="pravno"><a href="uvjeti.html">Uvjeti korištenja i prodaje</a> · <a href="privatnost.html">Izjava o privatnosti</a><br>
+       PONUDO AI · program za izradu građevinskih ponuda</p>
   </div>
 </footer>
 

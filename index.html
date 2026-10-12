@@ -8,6 +8,7 @@
 <meta property="og:description" content="Opiši posao ili slikaj bilješku s gradilišta — ponuda je gotova. Program za izvođače, za Windows.">
 <meta property="og:type" content="website">
 <link rel="icon" href="znak.svg">
+<link rel="stylesheet" href="animacija.css">
 <title>PONUDO AI</title>
 
 <style>
@@ -104,7 +105,7 @@ h1{font-weight:800;font-size:clamp(2.1rem,5vw,3.5rem);line-height:1.04;letter-sp
 h2{font-weight:700;font-size:clamp(1.55rem,3.2vw,2.3rem);line-height:1.12;letter-spacing:-.02em}
 h3{font-weight:600;font-size:1.08rem;line-height:1.32;letter-spacing:-.01em}
 p{margin:0}
-.lead{font-size:clamp(1.02rem,1.6vw,1.17rem);color:var(--fg-muted);max-width:62ch}
+.lead{font-size:clamp(1.02rem,1.6vw,1.17rem);color:var(--fg-muted);max-width:62ch;margin:0}
 .eyebrow{font-family:var(--ff-mono);font-size:.73rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent)}
 .num{font-family:var(--ff-mono);font-variant-numeric:tabular-nums}
 
@@ -119,8 +120,15 @@ p{margin:0}
 
 /* hero */
 .hero{background:radial-gradient(120% 120% at 88% 0%, var(--wash) 0%, transparent 62%),var(--bg);border-bottom:1px solid var(--line)}
-.hero .wrap{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(28px,4vw,54px);align-items:center;padding-block:clamp(40px,6vw,76px)}
-.hero-copy{display:grid;gap:22px;min-width:0}
+.hero .wrap{display:grid;gap:clamp(18px,2.4vw,28px);padding-block:clamp(22px,3vw,36px) clamp(32px,4.5vw,56px)}
+.hero-uvod{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:clamp(18px,3vw,40px);align-items:end}
+.hero-uvod .eyebrow{margin-bottom:11px}
+.hero-uvod h1{max-width:21ch;text-wrap:balance}
+.scena{margin:0}
+.hero-lead{max-width:76ch}
+.snimka{margin:clamp(30px,4vw,46px) 0 0}
+.snimka figcaption{max-width:72ch}
+
 .hero h1{max-width:15ch}
 .cta-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
 .btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--ff-display);font-weight:600;font-size:1rem;padding:14px 23px;border-radius:10px;text-decoration:none;border:1.5px solid transparent}
@@ -195,7 +203,7 @@ footer .pravno{text-align:right}
 @media (max-width:640px){footer .pravno{text-align:left}}
 footer b{font-family:var(--ff-display);font-weight:600;color:var(--fg)}
 
-@media (max-width:860px){ .hero .wrap{grid-template-columns:1fr} }
+@media (max-width:820px){ .hero-uvod{grid-template-columns:1fr;align-items:start} .hero-uvod h1{max-width:none} }
 @media (max-width:760px){ .steps,.split,.par{grid-template-columns:1fr} }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
@@ -234,19 +242,101 @@ footer b{font-family:var(--ff-display);font-weight:600;color:var(--fg)}
 
 <div class="hero">
   <div class="wrap">
-    <div class="hero-copy">
-      <p class="eyebrow">Program za izvođače · Windows</p>
-      <h1>Opiši posao. Ili samo slikaj bilješku.</h1>
-      <p class="lead">Natipkaš svojim riječima ili fotografiraš zgužvani papir s gradilišta — oboje radi jednako. AI prepozna koje stavke treba i u kojoj količini, a cijenu izračuna program po <strong>tvom</strong> cjeniku i tvojim pravilima: relacija, kat bez lifta, šuta, star beton.</p>
+
+    <div class="hero-uvod">
+      <div>
+        <p class="eyebrow">Program za izvođače · Windows</p>
+        <h1>Opiši posao. Ili samo slikaj bilješku.</h1>
+      </div>
       <div class="cta-row">
         <a class="btn btn-main" href="https://github.com/FORPEND/ponudo/releases/latest/download/PONUDO-win.zip">Preuzmi za Windows <span class="sz">108 MB</span></a>
         <a class="btn btn-ghost" href="#kako">Kako radi</a>
       </div>
     </div>
-    <figure>
-      <video src="promo.mp4" poster="poster.jpg" controls playsinline preload="metadata"></video>
-      <figcaption>Pravi posao: kupaonica, 31 m² keramike, treći kat bez lifta, 27 km od baze.</figcaption>
+
+    <figure class="scena">
+      <div class="prica" role="img" aria-label="Bilješka s gradilišta se fotografira mobitelom, slika se učita u program, pritisne se Pročitaj i dodaj radove, pa Sastavi ponudu — i ponuda je gotova.">
+        <div class="papir">
+          <div class="rukopis">
+            <span>Horvat – Nova cesta 5</span>
+            <span>kupaona</span>
+            <span>rušit sve + odvoz</span>
+            <span>keramika 15 zid i pod</span>
+            <span>wc, bojler, tuš</span>
+            <span>gletat i bojat 40</span>
+            <span class="mali">3. kat, nema lifta</span>
+          </div>
+        </div>
+
+        <div class="mobitel">
+          <div class="traziloK gl"></div><div class="traziloK gd"></div>
+          <div class="traziloK dl"></div><div class="traziloK dd"></div>
+        </div>
+
+        <div class="foto"><b>Horvat – Nova cesta 5
+kupaona
+rušit sve + odvoz
+keramika 15 zid i pod
+wc, bojler, tuš
+gletat i bojat 40
+3. kat, nema lifta</b></div>
+
+        <div class="program">
+          <div class="vrh"><i></i><i></i><i></i><span>PONUDO</span></div>
+          <div class="stupci">
+
+            <div class="unos">
+              <div class="nat">Brzi unos — opiši posao ili slikaj bilješke</div>
+              <div class="polje">Npr: kupaona, sve rušit i odvoz, keramika 15 zid i pod…</div>
+              <div class="slicice">
+                <div class="okvir"><div class="slicica"><b>Horvat – Nova cesta 5
+kupaona
+rušit sve + odvoz
+keramika 15 zid i pod
+wc, bojler, tuš
+gletat i bojat 40
+3. kat, nema lifta</b></div></div>
+                <span class="uz">1 fotografija · do 4</span>
+              </div>
+              <div class="gumb gumbAI">Pročitaj i dodaj radove</div>
+              <div class="citam">Čitam bilješku…</div>
+            </div>
+
+            <div class="panel">
+              <div class="nat">PONUDA</div>
+              <div class="prazno">Još nema odabranih radova.</div>
+              <div class="popis">
+                <div class="redak">Rušenje keramike <em>15 m²</em></div>
+                <div class="redak">Odvoz šute <em>1 kom</em></div>
+                <div class="redak">Keramika, zid i pod <em>15 m²</em></div>
+                <div class="redak">WC, bojler, tuš <em>3 kom</em></div>
+                <div class="redak">Gletanje i bojanje <em>40 m²</em></div>
+              </div>
+              <div class="pravilo">3. kat bez lifta · dodatak uračunat</div>
+              <div class="dno">
+                <div class="gumbSastavi">Sastavi ponudu</div>
+                <div class="zbroj"><b>Ukupno</b><strong>3.480,00 €</strong></div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="misa"><svg viewBox="0 0 24 24" fill="none"><path d="M5 2.5 19.5 11.2l-6.3 1.1-2.7 6.2z" fill="#fff" stroke="#16202B" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
+        <div class="bljesak"></div>
+
+        <div class="koraci">
+          <div>Zapišeš na gradilištu</div>
+          <div>Slikaš mobitelom</div>
+          <div>Učitaš sliku</div>
+          <div>Pročitaj i dodaj radove</div>
+          <div>Sastavi ponudu</div>
+        </div></div>
+      <figcaption>Od papira do ponude — i gdje se što stisne u programu.</figcaption>
     </figure>
+
+    <p class="lead hero-lead">Natipkaš svojim riječima ili fotografiraš zgužvani papir s gradilišta — oboje radi jednako. AI prepozna koje stavke treba i u kojoj količini, a cijenu izračuna program po <strong>tvom</strong> cjeniku i tvojim pravilima: relacija, kat bez lifta, šuta, star beton.</p>
+
   </div>
 </div>
 
@@ -273,6 +363,11 @@ footer b{font-family:var(--ff-display);font-weight:600;color:var(--fg)}
         <p>Tražilica ili kategorije, klik na stavku i upišeš količinu. Bez AI-ja, bez ograničenja, bez interneta.</p>
       </div>
     </div>
+
+    <figure class="snimka">
+      <video src="promo.mp4" poster="poster.jpg" controls playsinline preload="metadata"></video>
+      <figcaption>Snimka iz programa: isti posao upisan riječima, od prazne ponude do gotovog PDF-a. Pravi posao — kupaonica, 31 m² keramike, treći kat bez lifta, 27 km od baze.</figcaption>
+    </figure>
   </div>
 </section>
 

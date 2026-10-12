@@ -1,0 +1,444 @@
+/* ───────────────────────────────────────────────────────────────
+   Od papira do ponude — animacija u vrhu stranice.
+   Ujedno su i upute: poslije slikanja vidi se pravi program,
+   gdje se stisne „Pročitaj i dodaj radove" pa „Sastavi ponudu".
+   Bez skripte i bez vanjskih datoteka. Ciklus traje 22 s:
+     0–21 %   pišeš bilješku na gradilištu
+    21–34 %   slikaš je mobitelom
+    34–47 %   slika ulazi u program
+    47–75 %   stisneš „Pročitaj i dodaj radove", AI izlista radove
+    75–100 %  stisneš „Sastavi ponudu" — ponuda i iznos
+   ─────────────────────────────────────────────────────────────── */
+
+.prica{
+  --t:22s;
+  --papir:#F4EEE3;
+  --crte:#C6D2E1;
+  --grafit:#28313D;
+  position:relative;
+  aspect-ratio:16/9;
+  container-type:inline-size;
+  background:
+    radial-gradient(120% 95% at 80% 10%, rgba(43,95,158,.07), transparent 62%),
+    var(--surface-2);
+  border:1px solid var(--line);
+  border-radius:14px;
+  overflow:hidden;
+  box-shadow:var(--shadow);
+}
+.prica *{box-sizing:border-box}
+
+/* ═══ 1 · bilješka ═══ */
+.papir,.foto{
+  position:absolute; left:28%; top:5%; width:44%; height:84%;
+  background:var(--papir);
+  border-radius:3px 11px 3px 3px;
+  box-shadow:0 1px 1px rgba(22,32,43,.10), 0 16px 28px -18px rgba(22,32,43,.55);
+}
+.papir{ transform:rotate(-2.2deg); transform-origin:50% 55%;
+        animation:papirPut var(--t) linear infinite }
+.papir::after{
+  content:''; position:absolute; right:0; top:0; width:7%; aspect-ratio:1;
+  background:linear-gradient(225deg, var(--surface-2) 0 50%, rgba(22,32,43,.16) 50% 52%, var(--papir) 52%);
+  border-top-right-radius:11px;
+}
+@keyframes papirPut{
+  0%,21%  { opacity:1; transform:rotate(-2.2deg) translate(0,0) scale(1) }
+  26%     { opacity:1; transform:rotate(-1deg) translate(0,1.6cqw) scale(.74) }
+  31.5%   { opacity:1; transform:rotate(-1deg) translate(0,1.6cqw) scale(.74) }
+  32.5%   { opacity:0; transform:rotate(-1deg) translate(0,1.6cqw) scale(.74) }
+  100%    { opacity:0; transform:rotate(-2.2deg) translate(0,0) scale(1) }
+}
+
+.rukopis,.foto b,.slicica b{
+  font-family:'Caveat',"Segoe Script",cursive; font-weight:500;
+  color:var(--grafit); line-height:1.62em;
+}
+.rukopis{
+  position:absolute; inset:9% 8% 7% 9%;
+  font-size:3.45cqw;
+  background:repeating-linear-gradient(to bottom,
+      transparent 0 calc(1.62em - 1px), var(--crte) calc(1.62em - 1px) 1.62em);
+  background-position:0 .34em;
+}
+.rukopis span{ display:block; white-space:nowrap; clip-path:inset(0 100% 0 0) }
+.rukopis .mali{ font-size:.86em; opacity:.8 }
+.rukopis span:nth-child(1){ animation:pisi var(--t) linear infinite  .0s }
+.rukopis span:nth-child(2){ animation:pisi var(--t) linear infinite  .45s }
+.rukopis span:nth-child(3){ animation:pisi var(--t) linear infinite  .90s }
+.rukopis span:nth-child(4){ animation:pisi var(--t) linear infinite 1.35s }
+.rukopis span:nth-child(5){ animation:pisi var(--t) linear infinite 1.80s }
+.rukopis span:nth-child(6){ animation:pisi var(--t) linear infinite 2.25s }
+.rukopis span:nth-child(7){ animation:pisi var(--t) linear infinite 2.70s }
+@keyframes pisi{
+  0%,2%{ clip-path:inset(0 100% 0 0) }
+  6%   { clip-path:inset(0 0 0 0) }
+  96%  { clip-path:inset(0 0 0 0) }
+  99%  { clip-path:inset(0 100% 0 0) }
+  100% { clip-path:inset(0 100% 0 0) }
+}
+
+/* ═══ 2 · mobitel ═══ */
+.mobitel{
+  position:absolute; left:32%; top:9%; width:36%; height:80%;
+  border:1.5cqw solid var(--fg); border-radius:4cqw;
+  background:rgba(22,32,43,.07);
+  box-shadow:0 18px 34px -20px rgba(22,32,43,.7);
+  opacity:0; animation:mobitelPut var(--t) cubic-bezier(.4,0,.2,1) infinite;
+}
+.mobitel::before{
+  content:''; position:absolute; left:50%; top:1.1cqw; translate:-50% 0;
+  width:22%; height:.75cqw; background:var(--fg); border-radius:1cqw; opacity:.55;
+}
+@keyframes mobitelPut{
+  0%,20%{ opacity:0; transform:translateY(12%) scale(.96) }
+  25%   { opacity:1; transform:translateY(0) scale(1) }
+  33%   { opacity:1; transform:translateY(0) scale(1) }
+  35%   { opacity:0; transform:translateY(-3%) scale(.99) }
+  100%  { opacity:0 }
+}
+.traziloK{
+  position:absolute; width:6cqw; height:6cqw; border:.8cqw solid var(--accent); opacity:0;
+  animation:traziloPut var(--t) cubic-bezier(.3,0,.2,1) infinite;
+}
+.traziloK.gl{ left:7%;  top:8%;    border-right:0; border-bottom:0; border-radius:1.5cqw 0 0 0 }
+.traziloK.gd{ right:7%; top:8%;    border-left:0;  border-bottom:0; border-radius:0 1.5cqw 0 0 }
+.traziloK.dl{ left:7%;  bottom:8%; border-right:0; border-top:0;    border-radius:0 0 0 1.5cqw }
+.traziloK.dd{ right:7%; bottom:8%; border-left:0;  border-top:0;    border-radius:0 0 1.5cqw 0 }
+@keyframes traziloPut{
+  0%,22%{ opacity:0; transform:scale(1.18) }
+  26%   { opacity:1; transform:scale(1) }
+  31%   { opacity:1; transform:scale(1) }
+  32.5% { opacity:0; transform:scale(.97) }
+  100%  { opacity:0 }
+}
+.bljesak{
+  position:absolute; inset:0; background:#fff; opacity:0; pointer-events:none;
+  animation:bljesakPut var(--t) linear infinite;
+}
+@keyframes bljesakPut{
+  0%,31.6%{ opacity:0 } 32.3%{ opacity:.9 } 34.5%{ opacity:0 } 100%{ opacity:0 }
+}
+
+/* ═══ 3 · fotografija ulazi u program ═══ */
+.foto{
+  z-index:4;                      /* leti iznad prozora programa, ne iza njega */
+  border:.55cqw solid #fff; border-radius:1.4cqw;
+  box-shadow:0 12px 26px -14px rgba(22,32,43,.65);
+  transform-origin:0 0; opacity:0; overflow:hidden;
+  animation:fotoPut var(--t) cubic-bezier(.45,.05,.25,1) infinite;
+}
+.foto b{
+  position:absolute; inset:7% 7% 0 8%;
+  font-size:3.45cqw; font-weight:500; white-space:pre-line;
+  background:repeating-linear-gradient(to bottom,
+      transparent 0 calc(1.62em - 1px), var(--crte) calc(1.62em - 1px) 1.62em);
+  background-position:0 .34em;
+}
+@keyframes fotoPut{
+  0%,31.6%{ opacity:0; transform:translate(0,1.6cqw) scale(.74) rotate(-1deg) }
+  32.5%   { opacity:1; transform:translate(0,1.6cqw) scale(.74) rotate(-1deg) }
+  36%     { opacity:1; transform:translate(0,1.6cqw) scale(.74) rotate(-1deg) }
+  45%     { opacity:1; transform:translate(-19.8cqw,21.9cqw) scale(.198) rotate(-2deg) }
+  46.5%   { opacity:0; transform:translate(-19.8cqw,21.9cqw) scale(.198) rotate(-2deg) }
+  100%    { opacity:0 }
+}
+
+/* ═══ prozor programa ═══ */
+.program{
+  position:absolute; left:4%; right:4%; top:5%; bottom:13%;
+  display:flex; flex-direction:column;
+  background:var(--surface); border:1px solid var(--line); border-radius:11px;
+  box-shadow:0 2px 3px rgba(22,32,43,.06), 0 26px 46px -28px rgba(22,32,43,.6);
+  overflow:hidden; opacity:0;
+  animation:programPut var(--t) cubic-bezier(.3,0,.2,1) infinite;
+}
+@keyframes programPut{
+  0%,34%{ opacity:0; transform:translateY(3%) scale(.99) }
+  39%   { opacity:1; transform:translateY(0) scale(1) }
+  96%   { opacity:1; transform:translateY(0) scale(1) }
+  99%   { opacity:0 }
+  100%  { opacity:0 }
+}
+.program .vrh{
+  flex:none; padding:1.3cqw 2cqw;
+  background:var(--fg); color:var(--bg);
+  display:flex; align-items:center; gap:.9cqw;
+}
+.program .vrh i{ width:.95cqw; height:.95cqw; border-radius:50%; background:currentColor; opacity:.34; flex:none }
+.program .vrh span{ font-family:var(--ff-display); font-weight:700; font-size:1.85cqw; letter-spacing:.02em; margin-left:.6cqw }
+
+.stupci{ flex:1; min-height:0; display:grid; grid-template-columns:1.12fr 1fr; gap:1.8cqw; padding:1.8cqw 2cqw }
+
+/* ── lijevo: brzi unos ── */
+.unos{
+  align-self:start;
+  background:var(--accent-soft); border:1px solid var(--accent); border-radius:1cqw;
+  padding:1.4cqw; display:flex; flex-direction:column; gap:1.1cqw;
+}
+.unos .nat{ font-family:var(--ff-body); font-weight:600; font-size:1.6cqw; color:var(--fg) }
+.unos .polje{
+  background:var(--surface); border:1px solid var(--line); border-radius:.7cqw;
+  padding:1cqw; min-height:6.6cqw;
+  font-family:var(--ff-body); font-size:1.4cqw; color:var(--fg-muted);
+}
+.slicice{ display:flex; align-items:center; gap:1cqw }
+.slicice .okvir{
+  width:9cqw; aspect-ratio:9/8; border:1px dashed var(--line-strong); border-radius:.6cqw;
+  position:relative; flex:none;
+}
+.slicica{
+  position:absolute; inset:0; background:var(--papir);
+  border:1px solid #fff; border-radius:.5cqw; overflow:hidden; opacity:0;
+  animation:slicicaPut var(--t) linear infinite;
+}
+.slicica b{
+  position:absolute; inset:8% 6% 0 8%; display:block;
+  font-size:1.05cqw; white-space:pre-line;
+  background:repeating-linear-gradient(to bottom,
+      transparent 0 calc(1.62em - 1px), var(--crte) calc(1.62em - 1px) 1.62em);
+  background-position:0 .3em;
+}
+@keyframes slicicaPut{ 0%,44.5%{opacity:0} 46%{opacity:1} 96%{opacity:1} 99%{opacity:0} 100%{opacity:0} }
+.slicice .uz{ font-family:var(--ff-body); font-size:1.3cqw; color:var(--fg-muted) }
+
+.gumb{
+  align-self:flex-start; border-radius:.8cqw; padding:1cqw 1.6cqw;
+  font-family:var(--ff-body); font-weight:700; font-size:1.55cqw;
+  border:1px solid var(--accent); background:var(--surface); color:var(--accent-2);
+  white-space:nowrap;
+}
+.gumbAI{ animation:gumbAIPut var(--t) linear infinite }
+@keyframes gumbAIPut{
+  0%,50.5%{ background:var(--surface); color:var(--accent-2); transform:scale(1) }
+  51.5%   { background:var(--accent); color:var(--accent-ink); transform:scale(.97) }
+  54%     { background:var(--accent); color:var(--accent-ink); transform:scale(1) }
+  70%     { background:var(--accent); color:var(--accent-ink) }
+  72%     { background:var(--surface); color:var(--accent-2) }
+  100%    { background:var(--surface); color:var(--accent-2) }
+}
+.citam{
+  font-family:var(--ff-body); font-size:1.4cqw; color:var(--accent-2); font-weight:600;
+  opacity:0; animation:citamPut var(--t) linear infinite;
+}
+@keyframes citamPut{ 0%,52%{opacity:0} 54%{opacity:1} 61%{opacity:1} 63%{opacity:0} 100%{opacity:0} }
+
+/* ── desno: ponuda ── */
+.panel{
+  background:var(--surface); border:1px solid var(--line); border-radius:1cqw;
+  padding:1.4cqw; display:flex; flex-direction:column; min-height:0;
+  position:relative; overflow:hidden;
+}
+.panel .nat{
+  font-family:var(--ff-display); font-weight:700; font-size:1.7cqw; letter-spacing:.03em;
+  color:var(--fg); margin-bottom:.9cqw;
+}
+.prazno{
+  position:absolute; left:1.4cqw; right:1.4cqw; top:42%;
+  font-family:var(--ff-body); font-size:1.35cqw; color:var(--fg-muted); text-align:center;
+  animation:praznoPut var(--t) steps(1,end) infinite;
+}
+@keyframes praznoPut{ 0%{opacity:1} 63%{opacity:1} 64%{opacity:0} 100%{opacity:0} }
+
+.redak{
+  display:flex; justify-content:space-between; align-items:baseline; gap:1cqw;
+  font-family:var(--ff-body); font-size:1.5cqw; color:var(--fg);
+  padding:.58cqw 0; border-bottom:1px solid var(--line);
+  opacity:0; transform:translateX(1cqw);
+  animation:redakPut var(--t) cubic-bezier(.2,.8,.3,1) infinite;
+}
+.redak em{ font-family:var(--ff-mono); font-style:normal; font-size:.9em; color:var(--fg-muted); flex:none }
+.popis{ display:flex; flex-direction:column }
+.popis .redak:nth-child(1){ animation-delay:14.1s }
+.popis .redak:nth-child(2){ animation-delay:14.4s }
+.popis .redak:nth-child(3){ animation-delay:14.7s }
+.popis .redak:nth-child(4){ animation-delay:15.0s }
+.popis .redak:nth-child(5){ animation-delay:15.3s }
+@keyframes redakPut{
+  0%  { opacity:0; transform:translateX(1cqw) }
+  1.4%{ opacity:1; transform:translateX(0) }
+  92% { opacity:1; transform:translateX(0) }
+  96% { opacity:0 }
+  100%{ opacity:0 }
+}
+.pravilo{
+  align-self:flex-start; margin-top:.9cqw;
+  background:var(--accent-soft); color:var(--accent-2);
+  border-radius:.9cqw; padding:.45cqw 1cqw;
+  font-family:var(--ff-body); font-weight:600; font-size:1.28cqw;
+  opacity:0; animation:praviloPut var(--t) ease-out infinite 15.8s;
+}
+@keyframes praviloPut{
+  0%{opacity:0; transform:translateY(.6cqw)} 1.8%{opacity:1; transform:translateY(0)}
+  88%{opacity:1} 92%{opacity:0} 100%{opacity:0}
+}
+.dno{ margin-top:auto; position:relative; min-height:5.4cqw }
+.gumbSastavi{
+  position:absolute; left:0; right:0; bottom:0; text-align:center;
+  background:var(--accent); color:var(--accent-ink); border:0;
+  border-radius:.8cqw; padding:1.05cqw; font-family:var(--ff-body); font-weight:700; font-size:1.55cqw;
+  opacity:0; animation:gumbSastaviPut var(--t) linear infinite;
+}
+@keyframes gumbSastaviPut{
+  0%,64%{ opacity:0; transform:scale(1); background:var(--accent) }
+  66%   { opacity:1; transform:scale(1) }
+  77.5% { opacity:1; transform:scale(1) }
+  78.5% { opacity:1; transform:scale(.97); background:var(--accent-2) }
+  80%   { opacity:1; transform:scale(1);  background:var(--accent-2) }
+  82%   { opacity:0 }
+  100%  { opacity:0 }
+}
+.zbroj{
+  position:absolute; left:0; right:0; bottom:0; display:flex; justify-content:space-between; align-items:baseline;
+  border-top:2px solid var(--fg); padding-top:1cqw;
+  opacity:0; animation:zbrojPut var(--t) cubic-bezier(.2,.8,.3,1) infinite;
+}
+.zbroj b{ font-family:var(--ff-body); font-weight:600; font-size:1.55cqw; color:var(--fg-muted) }
+.zbroj strong{ font-family:var(--ff-display); font-weight:800; font-size:3.3cqw; color:var(--fg); letter-spacing:-.025em }
+@keyframes zbrojPut{
+  0%,81%{ opacity:0; transform:translateY(.9cqw) }
+  84%   { opacity:1; transform:translateY(0) }
+  93%   { opacity:1 } 96%{ opacity:0 } 100%{ opacity:0 }
+}
+
+/* ── pokazivač miša ── */
+.misa{
+  position:absolute; left:0; top:0; width:2.6cqw; height:2.6cqw;
+  opacity:0; pointer-events:none; z-index:5;
+  animation:misaPut var(--t) cubic-bezier(.35,0,.25,1) infinite;
+}
+.misa svg{ width:100%; height:100%; display:block; filter:drop-shadow(0 1px 2px rgba(22,32,43,.45)) }
+@keyframes misaPut{
+  0%,46%{ opacity:0; transform:translate(40cqw,28cqw) scale(1) }
+  48%   { opacity:1; transform:translate(40cqw,28cqw) scale(1) }
+  51%   { opacity:1; transform:translate(17.2cqw,34.7cqw) scale(1) }
+  52%   { opacity:1; transform:translate(17.2cqw,34.7cqw) scale(.88) }
+  53.2% { opacity:1; transform:translate(17.2cqw,34.7cqw) scale(1) }
+  64%   { opacity:1; transform:translate(17.2cqw,34.7cqw) scale(1) }
+  77%   { opacity:1; transform:translate(73.6cqw,43.2cqw) scale(1) }
+  78.5% { opacity:1; transform:translate(73.6cqw,43.2cqw) scale(.88) }
+  80%   { opacity:1; transform:translate(73.6cqw,43.2cqw) scale(1) }
+  83%   { opacity:0; transform:translate(73.6cqw,43.2cqw) scale(1) }
+  100%  { opacity:0 }
+}
+
+/* ═══ traka koraka ═══ */
+.koraci{
+  position:absolute; left:0; right:0; bottom:0;
+  display:grid; grid-template-columns:repeat(5,1fr);
+  background:rgba(22,32,43,.05); border-top:1px solid var(--line);
+  font-family:var(--ff-body); font-size:1.7cqw;
+}
+.koraci div{
+  padding:1.25cqw .5cqw; text-align:center;
+  color:var(--fg-muted); border-right:1px solid var(--line); position:relative;
+}
+.koraci div:last-child{ border-right:0 }
+.koraci div::before{
+  content:''; position:absolute; left:0; right:0; top:-1px; height:2px;
+  background:var(--accent); transform:scaleX(0); transform-origin:left;
+}
+.koraci div:nth-child(1){ animation:korak1 var(--t) steps(1,end) infinite }
+.koraci div:nth-child(2){ animation:korak2 var(--t) steps(1,end) infinite }
+.koraci div:nth-child(3){ animation:korak3 var(--t) steps(1,end) infinite }
+.koraci div:nth-child(4){ animation:korak4 var(--t) steps(1,end) infinite }
+.koraci div:nth-child(5){ animation:korak5 var(--t) steps(1,end) infinite }
+.koraci div:nth-child(1)::before{ animation:crta1 var(--t) linear infinite }
+.koraci div:nth-child(2)::before{ animation:crta2 var(--t) linear infinite }
+.koraci div:nth-child(3)::before{ animation:crta3 var(--t) linear infinite }
+.koraci div:nth-child(4)::before{ animation:crta4 var(--t) linear infinite }
+.koraci div:nth-child(5)::before{ animation:crta5 var(--t) linear infinite }
+@keyframes korak1{ 0%{color:var(--fg);font-weight:600} 20.9%{color:var(--fg);font-weight:600} 21%{color:var(--fg-muted);font-weight:400} 100%{color:var(--fg-muted);font-weight:400} }
+@keyframes korak2{ 0%{color:var(--fg-muted);font-weight:400} 21%{color:var(--fg);font-weight:600} 33.9%{color:var(--fg);font-weight:600} 34%{color:var(--fg-muted);font-weight:400} 100%{color:var(--fg-muted);font-weight:400} }
+@keyframes korak3{ 0%{color:var(--fg-muted);font-weight:400} 34%{color:var(--fg);font-weight:600} 46.9%{color:var(--fg);font-weight:600} 47%{color:var(--fg-muted);font-weight:400} 100%{color:var(--fg-muted);font-weight:400} }
+@keyframes korak4{ 0%{color:var(--fg-muted);font-weight:400} 47%{color:var(--fg);font-weight:600} 74.9%{color:var(--fg);font-weight:600} 75%{color:var(--fg-muted);font-weight:400} 100%{color:var(--fg-muted);font-weight:400} }
+@keyframes korak5{ 0%{color:var(--fg-muted);font-weight:400} 75%{color:var(--fg);font-weight:600} 100%{color:var(--fg);font-weight:600} }
+@keyframes crta1{ 0%{transform:scaleX(0)} 20.9%{transform:scaleX(1)} 21%{transform:scaleX(0)} 100%{transform:scaleX(0)} }
+@keyframes crta2{ 0%,21%{transform:scaleX(0)} 33.9%{transform:scaleX(1)} 34%{transform:scaleX(0)} 100%{transform:scaleX(0)} }
+@keyframes crta3{ 0%,34%{transform:scaleX(0)} 46.9%{transform:scaleX(1)} 47%{transform:scaleX(0)} 100%{transform:scaleX(0)} }
+@keyframes crta4{ 0%,47%{transform:scaleX(0)} 74.9%{transform:scaleX(1)} 75%{transform:scaleX(0)} 100%{transform:scaleX(0)} }
+@keyframes crta5{ 0%,75%{transform:scaleX(0)} 99%{transform:scaleX(1)} 100%{transform:scaleX(1)} }
+
+/* ═══ uži ekrani: scena je viša, stupci se izmjenjuju, slova veća ═══ */
+/* element ne može pitati sam sebe za širinu, pa visina ide preko širine prozora */
+@media (max-width:604px){ .prica{ aspect-ratio:4/5 } }
+@container (max-width:560px){
+
+  .papir,.foto{ left:12%; top:4%; width:76%; height:72% }
+  .rukopis{ font-size:6.2cqw }
+  .foto b{ font-size:6.2cqw }
+  .mobitel{ left:15%; top:6%; width:70%; height:76%; border-width:2.6cqw; border-radius:7cqw }
+  .mobitel::before{ top:1.9cqw; height:1.3cqw }
+  .traziloK{ width:10cqw; height:10cqw; border-width:1.4cqw }
+
+  .program{ left:3%; right:3%; top:3%; bottom:11% }
+  .program .vrh{ padding:2.2cqw 3.2cqw }
+  .program .vrh i{ width:1.7cqw; height:1.7cqw }
+  .program .vrh span{ font-size:3.4cqw }
+
+  /* obje strane leže jedna preko druge pa se izmjenjuju */
+  .stupci{ grid-template-columns:1fr; padding:3cqw }
+  .unos,.panel{ grid-area:1/1 }
+  .unos{ align-self:stretch; padding:2.6cqw; gap:2cqw; animation:unosMali var(--t) linear infinite }
+  .unos .nat{ font-size:3.2cqw }
+  .unos .polje{ font-size:2.9cqw; padding:2cqw; min-height:12cqw }
+  .slicice .okvir{ width:17cqw }
+  .slicica b{ font-size:2.1cqw }
+  .slicice .uz{ font-size:2.6cqw }
+  .gumb{ font-size:3.2cqw; padding:2cqw 3cqw; border-radius:1.6cqw }
+  .citam{ font-size:2.9cqw }
+
+  .panel{ padding:2.6cqw; animation:panelMali var(--t) linear infinite }
+  .panel .nat{ font-size:3.4cqw; margin-bottom:1.8cqw }
+  .prazno{ display:none }
+  .redak{ font-size:3cqw; padding:1.2cqw 0 }
+  .pravilo{ font-size:2.6cqw; padding:.9cqw 2cqw; border-radius:1.6cqw }
+  .dno{ min-height:10cqw }
+  .gumbSastavi{ font-size:3.2cqw; padding:2.1cqw; border-radius:1.6cqw }
+  .zbroj b{ font-size:3cqw }
+  .zbroj strong{ font-size:6.6cqw }
+
+  /* fotografija slijeće u manji okvir na drugom mjestu */
+  .foto{ animation:fotoPutMali var(--t) cubic-bezier(.45,.05,.25,1) infinite }
+
+  /* traka koraka: jedna čitljiva rečenica koja se mijenja */
+  .koraci{ display:block; position:absolute; height:9%; font-size:3.3cqw }
+  .koraci div{
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    border-right:0; padding:0 2cqw; opacity:0; color:var(--fg); font-weight:600;
+    animation-duration:var(--t); animation-iteration-count:infinite; animation-timing-function:steps(1,end);
+  }
+  .koraci div::before{ display:none }
+  .koraci div:nth-child(1){ animation-name:vid1 }
+  .koraci div:nth-child(2){ animation-name:vid2 }
+  .koraci div:nth-child(3){ animation-name:vid3 }
+  .koraci div:nth-child(4){ animation-name:vid4 }
+  .koraci div:nth-child(5){ animation-name:vid5 }
+  .misa{ display:none }
+}
+@keyframes unosMali{ 0%,70%{opacity:1} 73%{opacity:0} 100%{opacity:0} }
+@keyframes panelMali{ 0%,70%{opacity:0} 73%{opacity:1} 96%{opacity:1} 99%{opacity:0} 100%{opacity:0} }
+@keyframes fotoPutMali{
+  0%,31.6%{ opacity:0; transform:translate(0,1.6cqw) scale(.74) rotate(-1deg) }
+  32.5%   { opacity:1; transform:translate(0,1.6cqw) scale(.74) rotate(-1deg) }
+  36%     { opacity:1; transform:translate(0,1.6cqw) scale(.74) rotate(-1deg) }
+  45%     { opacity:1; transform:translate(-5.5cqw,30cqw) scale(.224) rotate(-2deg) }
+  46.5%   { opacity:0; transform:translate(-5.5cqw,30cqw) scale(.224) rotate(-2deg) }
+  100%    { opacity:0 }
+}
+@keyframes vid1{ 0%{opacity:1} 20.9%{opacity:1} 21%{opacity:0} 100%{opacity:0} }
+@keyframes vid2{ 0%{opacity:0} 21%{opacity:1} 33.9%{opacity:1} 34%{opacity:0} 100%{opacity:0} }
+@keyframes vid3{ 0%{opacity:0} 34%{opacity:1} 46.9%{opacity:1} 47%{opacity:0} 100%{opacity:0} }
+@keyframes vid4{ 0%{opacity:0} 47%{opacity:1} 74.9%{opacity:1} 75%{opacity:0} 100%{opacity:0} }
+@keyframes vid5{ 0%{opacity:0} 75%{opacity:1} 100%{opacity:1} }
+
+/* ═══ bez gibanja ═══ */
+@media (prefers-reduced-motion:reduce){
+  .prica *{ animation:none !important }
+  .papir,.mobitel,.traziloK,.bljesak,.foto,.misa,.citam,.prazno,.gumbSastavi{ display:none }
+  .program{ opacity:1; transform:none }
+  .slicica,.redak,.zbroj,.pravilo{ opacity:1; transform:none }
+  .gumbAI{ background:var(--accent); color:var(--accent-ink) }
+  .koraci div:last-child{ color:var(--fg); font-weight:600 }
+  .koraci div:last-child::before{ transform:scaleX(1) }
+}

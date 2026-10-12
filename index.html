@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="PONUDO AI — program za izradu građevinskih ponuda. Opišeš posao ili slikaš bilješku, a cijena se računa po tvom cjeniku. Za Windows, 20 € godišnje.">
+<meta name="description" content="PONUDO AI — program za izradu građevinskih ponuda. Opišeš posao ili slikaš bilješku, a cijena se računa po tvom cjeniku. Za Windows. Paket od 20 ponuda — 20 €.">
 <meta property="og:title" content="PONUDO AI">
 <meta property="og:description" content="Opiši posao ili slikaj bilješku s gradilišta — ponuda je gotova. Program za izvođače, za Windows.">
 <meta property="og:type" content="website">
@@ -188,6 +188,13 @@ td.d{font-family:var(--ff-mono);font-variant-numeric:tabular-nums;color:var(--ac
 .buy{border:1px solid var(--line);border-radius:16px;background:var(--surface);padding:clamp(26px,4vw,38px);display:grid;gap:14px;box-shadow:var(--shadow)}
 .bigprice{font-family:var(--ff-display);font-weight:800;font-size:clamp(2.3rem,6vw,3.2rem);line-height:1;letter-spacing:-.03em}
 .bigprice small{font-family:var(--ff-mono);font-size:.88rem;font-weight:400;color:var(--fg-muted);letter-spacing:0;display:block;margin-top:10px}
+.paketi{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;max-width:620px}
+.paket{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:24px 22px;position:relative}
+.paket.istaknut{border-color:var(--accent);background:var(--accent-soft)}
+.paket .oznaka{position:absolute;top:-10px;left:22px;background:var(--accent);color:var(--accent-ink);
+  font-family:var(--ff-mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:5px}
+.paket .bigprice{font-size:clamp(2rem,4.5vw,2.6rem)}
+.sitno{font-size:.86rem;color:var(--fg-muted);margin:14px 0 0}
 .kontakt{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
 .kontakt a{display:grid;gap:3px;font-family:var(--ff-mono);font-size:1rem;background:var(--surface);border:1px solid var(--line-strong);border-radius:12px;padding:14px 20px;color:var(--fg);text-decoration:none}
 .kontakt a:hover{border-color:var(--accent);color:var(--accent)}
@@ -236,7 +243,7 @@ footer b{font-family:var(--ff-display);font-weight:600;color:var(--fg)}
       </svg>
       <b>PONUDO<i> AI</i></b>
     </div>
-    <p class="price">20 € godišnje</p>
+    <p class="price">od 20 € za 20 ponuda</p>
   </div>
 </header>
 
@@ -460,16 +467,29 @@ gletat i bojat 40
 <section style="background:var(--surface-2);border-block:1px solid var(--line)">
   <div class="wrap">
     <div class="buy">
-      <p class="eyebrow">Jedna cijena, bez plaćanja po ponudi</p>
-      <p class="bigprice">20 €<small>godišnje, po korisniku</small></p>
+      <p class="eyebrow">Plaćaš koliko napraviš</p>
+      <h2 style="margin:12px 0 6px">Paket ponuda, bez pretplate.</h2>
+      <p class="lead" style="margin-bottom:26px">Nema mjesečnog računa i nema obnove koja te iznenadi. Kupiš paket, trošiš ga svojim tempom. <strong>Ručno slaganje iz cjenika je besplatno i neograničeno</strong> — paket trošiš samo kad AI čita tvoju bilješku ili opis.</p>
+
+      <div class="paketi">
+        <div class="paket">
+          <p class="bigprice">20 €<small>20 ponuda · 1 € po ponudi</small></p>
+        </div>
+        <div class="paket istaknut">
+          <span class="oznaka">povoljnije</span>
+          <p class="bigprice">49 €<small>60 ponuda · 0,82 € po ponudi</small></p>
+        </div>
+      </div>
+      <p class="sitno">Cijene bez PDV-a. Kupljene ponude vrijede 12 mjeseci od kupnje.</p>
+
       <ul class="ticks">
+        <li><strong>Jedna ponuda = jedno čitanje</strong> bilješke ili opisa</li>
+        <li><strong>Ručni odabir iz cjenika je neograničen</strong> — ne troši paket i radi bez interneta</li>
         <li>Oko 110 stavki u cjeniku za početak — sve mijenjaš, dodaješ svoje, brišeš nepotrebne</li>
-        <li>250 AI čitanja godišnje</li>
-        <li>Opis riječima, fotografija ili ručni odabir iz cjenika</li>
-        <li>Ručni unos neograničen — radi i kad potrošiš kvotu, i bez interneta</li>
         <li>Ponude se spremaju u arhivu, cijene i stavke možeš ispraviti prije slanja</li>
-        <li>PDF s tvojim zaglavljem, logom i avansom</li>
+        <li>PDF s tvojim zaglavljem, logom, avansom i barkodom za plaćanje</li>
         <li>Ponude i arhiva ostaju na tvom računalu</li>
+        <li>Nadogradnje uključene</li>
       </ul>
     </div>
   </div>

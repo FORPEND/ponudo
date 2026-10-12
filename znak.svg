@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <g fill="#16202B">
+    <!-- tlo, kao na logu Čičak Bau-a -->
+    <ellipse cx="512" cy="884" rx="386" ry="19"/>
+    <!-- kuća -->
+    <path d="M524 398 L806 598 L744 598 L744 856 L304 856 L304 598 L242 598 Z"/>
+    <!-- prozor i vrata, izrezani -->
+    <rect x="356" y="664" width="104" height="92" rx="6" fill="#FFFFFF"/>
+    <rect x="566" y="664" width="104" height="92" rx="6" fill="#FFFFFF"/>
+    <rect x="478" y="742" width="80" height="114" rx="5" fill="#FFFFFF"/>
+    <!-- olovka, na mjestu gdje je kod Čičak Bau-a čekić -->
+    <g transform="rotate(44 330 300)">
+      <rect x="44" y="266" width="392" height="62" rx="14"/>
+      <rect x="406" y="266" width="34" height="62" fill="#FFFFFF"/>
+      <path d="M440 266 L452 266 L556 297 L452 328 L440 328 Z"/>
+      <path d="M520 285 L556 297 L520 309 Z" fill="#FFFFFF"/>
+    </g>
+  </g>
+</svg>

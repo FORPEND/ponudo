@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="hr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="PONUDO AI — program za izradu građevinskih ponuda. Opišeš posao ili slikaš bilješku, a cijena se računa po tvom cjeniku. Za Windows, 20 € godišnje.">
+<meta property="og:title" content="PONUDO AI">
+<meta property="og:description" content="Opiši posao ili slikaj bilješku s gradilišta — ponuda je gotova. Program za izvođače, za Windows.">
+<meta property="og:type" content="website">
+<link rel="icon" href="znak.svg">
+<title>PONUDO AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Figtree:wght@400;500;600&family=Outfit:wght@600;700;800&display=swap">
+
+<style>
+/* Layout: wide two-column opener on sand paper, then a single reading column.
+   Sand ground, deep slate ink, one blue accent. No gold, no hairline boxes. */
+:root{
+  --bg:#EFEBE3; --surface:#FBF9F5; --surface-2:#E5DFD4;
+  --fg:#16202B; --fg-muted:#6C6A63;
+  --line:#DBD4C7; --line-strong:#C2B9A8;
+  --accent:#2B5F9E; --accent-2:#1E4876; --accent-ink:#FFFFFF; --accent-soft:#E3EAF4;
+  --wash:rgba(43,95,158,.09);
+  --shadow:0 1px 2px rgba(22,32,43,.05), 0 8px 26px -14px rgba(22,32,43,.28);
+  --ff-display:"Outfit","Segoe UI",Arial,sans-serif;
+  --ff-body:"Figtree","Segoe UI",Roboto,Arial,sans-serif;
+  --ff-mono:"DM Mono",ui-monospace,"Courier New",monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#121820; --surface:#1A222C; --surface-2:#222B36;
+    --fg:#ECE8E0; --fg-muted:#9BA1A9;
+    --line:#2C3641; --line-strong:#3F4B58;
+    --accent:#74A8E6; --accent-2:#A9CBF2; --accent-ink:#0F1720; --accent-soft:#1C2A3A;
+    --wash:rgba(116,168,230,.10);
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 30px -16px rgba(0,0,0,.8);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121820; --surface:#1A222C; --surface-2:#222B36;
+  --fg:#ECE8E0; --fg-muted:#9BA1A9;
+  --line:#2C3641; --line-strong:#3F4B58;
+  --accent:#74A8E6; --accent-2:#A9CBF2; --accent-ink:#0F1720; --accent-soft:#1C2A3A;
+  --wash:rgba(116,168,230,.10);
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 30px -16px rgba(0,0,0,.8);
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--ff-body);font-size:16.5px;line-height:1.62;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1120px;margin:0 auto;padding-inline:22px}
+section{padding-block:clamp(46px,7vw,86px)}
+h1,h2,h3{font-family:var(--ff-display);text-wrap:balance;margin:0}
+h1{font-weight:800;font-size:clamp(2.1rem,5vw,3.5rem);line-height:1.04;letter-spacing:-.025em}
+h2{font-weight:700;font-size:clamp(1.55rem,3.2vw,2.3rem);line-height:1.12;letter-spacing:-.02em}
+h3{font-weight:600;font-size:1.08rem;line-height:1.32;letter-spacing:-.01em}
+p{margin:0}
+.lead{font-size:clamp(1.02rem,1.6vw,1.17rem);color:var(--fg-muted);max-width:62ch}
+.eyebrow{font-family:var(--ff-mono);font-size:.73rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent)}
+.num{font-family:var(--ff-mono);font-variant-numeric:tabular-nums}
+
+/* header */
+.topbar{background:var(--surface);border-bottom:1px solid var(--line)}
+.topbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:11px}
+.brand svg{width:40px;height:40px;flex:none;color:var(--fg)}
+.brand b{font-family:var(--ff-display);font-weight:800;font-size:1.2rem;letter-spacing:-.025em}
+.brand b i{color:var(--accent);font-style:normal}
+.topbar .price{font-family:var(--ff-mono);font-size:.85rem;color:var(--fg-muted)}
+
+/* hero */
+.hero{background:radial-gradient(120% 120% at 88% 0%, var(--wash) 0%, transparent 62%),var(--bg);border-bottom:1px solid var(--line)}
+.hero .wrap{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(28px,4vw,54px);align-items:center;padding-block:clamp(40px,6vw,76px)}
+.hero-copy{display:grid;gap:22px;min-width:0}
+.hero h1{max-width:15ch}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--ff-display);font-weight:600;font-size:1rem;padding:14px 23px;border-radius:10px;text-decoration:none;border:1.5px solid transparent}
+.btn-main{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);box-shadow:var(--shadow)}
+.btn-main:hover{background:var(--accent-2);border-color:var(--accent-2)}
+.btn-main .sz{font-family:var(--ff-mono);font-size:.76rem;font-weight:400;opacity:.8}
+.btn-ghost{color:var(--fg);border-color:var(--line-strong);background:transparent}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+a:focus-visible,.btn:focus-visible{outline:2.5px solid var(--accent);outline-offset:3px}
+
+/* media */
+figure{margin:0;min-width:0}
+video,.shot{width:100%;display:block;border-radius:12px;border:1px solid var(--line);background:var(--surface-2);box-shadow:var(--shadow)}
+figcaption{margin-top:10px;font-size:.89rem;color:var(--fg-muted)}
+
+/* cards */
+.steps{display:grid;gap:18px;grid-template-columns:repeat(3,1fr);margin-top:32px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:24px;display:grid;gap:10px;align-content:start;min-width:0;box-shadow:var(--shadow)}
+.card .n{font-family:var(--ff-mono);font-size:.76rem;color:var(--accent-ink);background:var(--accent);width:28px;height:28px;border-radius:9px;display:grid;place-items:center}
+.card p{font-size:.95rem;color:var(--fg-muted)}
+
+.split{display:grid;gap:18px;grid-template-columns:1fr 1fr;margin-top:30px}
+.half{border-radius:14px;padding:26px;display:grid;gap:10px;align-content:start;min-width:0}
+.half.a{background:var(--surface);border:1px solid var(--line)}
+.half.b{background:var(--accent-soft);border:1.5px solid var(--accent)}
+.half h3{font-family:var(--ff-mono);font-size:.74rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.half strong{font-family:var(--ff-display);font-weight:700;font-size:1.3rem;display:block;letter-spacing:-.015em}
+.half p{font-size:.95rem;color:var(--fg-muted)}
+.half.b p{color:var(--fg)}
+
+/* sheet */
+.sheet{margin-top:28px;border:1px solid var(--line);border-radius:14px;background:var(--surface);overflow:hidden;box-shadow:var(--shadow)}
+.sheet .row{display:flex;justify-content:space-between;align-items:baseline;gap:18px;padding:13px 22px;border-bottom:1px solid var(--line)}
+.sheet .row:last-child{border-bottom:0}
+.sheet .row span:first-child{font-size:.95rem;min-width:0}
+.sheet .row .v{font-family:var(--ff-mono);font-size:.89rem;font-variant-numeric:tabular-nums;color:var(--accent);white-space:nowrap}
+.note{margin-top:18px;font-size:.93rem;color:var(--fg-muted);max-width:64ch}
+
+/* table */
+.tablewrap{margin-top:26px;overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--surface);box-shadow:var(--shadow)}
+table{border-collapse:collapse;width:100%;min-width:470px}
+th,td{padding:14px 20px;text-align:left;border-bottom:1px solid var(--line);font-size:.94rem}
+thead th{font-family:var(--ff-mono);font-size:.71rem;font-weight:500;letter-spacing:.11em;text-transform:uppercase;color:var(--fg-muted)}
+tbody tr:last-child td{border-bottom:0}
+td.n{font-family:var(--ff-mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+td.d{font-family:var(--ff-mono);font-variant-numeric:tabular-nums;color:var(--accent);white-space:nowrap}
+
+.ticks{display:grid;gap:12px;margin:24px 0 0;padding:0;list-style:none}
+.ticks li{display:flex;gap:12px;align-items:baseline;font-size:.98rem}
+.ticks li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent);flex:none;transform:translateY(-2px)}
+
+.warn{margin-top:26px;border:1.5px solid var(--line-strong);border-radius:14px;background:var(--surface);padding:26px;display:grid;gap:11px;box-shadow:var(--shadow)}
+.warn h3{font-family:var(--ff-display);font-weight:700;font-size:1.14rem}
+.warn p{font-size:.95rem}
+.warn .screen{font-family:var(--ff-mono);font-size:.83rem;background:var(--surface-2);border-radius:9px;padding:12px 15px;color:var(--fg-muted)}
+
+.buy{border:1px solid var(--line);border-radius:16px;background:var(--surface);padding:clamp(26px,4vw,38px);display:grid;gap:14px;box-shadow:var(--shadow)}
+.bigprice{font-family:var(--ff-display);font-weight:800;font-size:clamp(2.3rem,6vw,3.2rem);line-height:1;letter-spacing:-.03em}
+.bigprice small{font-family:var(--ff-mono);font-size:.88rem;font-weight:400;color:var(--fg-muted);letter-spacing:0;display:block;margin-top:10px}
+.kontakt{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
+.kontakt a{display:grid;gap:3px;font-family:var(--ff-mono);font-size:1rem;background:var(--surface);border:1px solid var(--line-strong);border-radius:12px;padding:14px 20px;color:var(--fg);text-decoration:none}
+.kontakt a:hover{border-color:var(--accent);color:var(--accent)}
+.kontakt a span{font-family:var(--ff-body);font-size:.68rem;letter-spacing:.13em;text-transform:uppercase;color:var(--fg-muted)}
+
+.par{display:grid;gap:20px;grid-template-columns:1.55fr 1fr;margin-top:28px;align-items:start}
+
+footer{border-top:1px solid var(--line);background:var(--surface)}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-block:28px}
+footer p{font-size:.87rem;color:var(--fg-muted)}
+footer b{font-family:var(--ff-display);font-weight:600;color:var(--fg)}
+
+@media (max-width:860px){ .hero .wrap{grid-template-columns:1fr} }
+@media (max-width:760px){ .steps,.split,.par{grid-template-columns:1fr} }
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+<style>
+ html{-webkit-text-size-adjust:100%}
+ body{margin:0}
+ img{max-width:100%}
+</style>
+</head>
+<body>
+
+
+<header class="topbar">
+  <div class="wrap">
+    <div class="brand">
+      <svg viewBox="0 0 1024 1024" aria-hidden="true">
+        <g fill="currentColor">
+          <ellipse cx="512" cy="884" rx="386" ry="19"/>
+          <path d="M524 398 L806 598 L744 598 L744 856 L304 856 L304 598 L242 598 Z"/>
+          <rect x="356" y="664" width="104" height="92" rx="6" fill="var(--surface)"/>
+          <rect x="566" y="664" width="104" height="92" rx="6" fill="var(--surface)"/>
+          <rect x="478" y="742" width="80" height="114" rx="5" fill="var(--surface)"/>
+          <g transform="rotate(44 330 300)">
+            <rect x="44" y="266" width="392" height="62" rx="14"/>
+            <rect x="406" y="266" width="34" height="62" fill="var(--surface)"/>
+            <path d="M440 266 L452 266 L556 297 L452 328 L440 328 Z"/>
+            <path d="M520 285 L556 297 L520 309 Z" fill="var(--surface)"/>
+          </g>
+        </g>
+      </svg>
+      <b>PONUDO<i> AI</i></b>
+    </div>
+    <p class="price">20 € godišnje</p>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap">
+    <div class="hero-copy">
+      <p class="eyebrow">Program za izvođače · Windows</p>
+      <h1>Opiši posao. Ili samo slikaj bilješku.</h1>
+      <p class="lead">Natipkaš svojim riječima ili fotografiraš zgužvani papir s gradilišta — oboje radi jednako. AI prepozna koje stavke treba i u kojoj količini, a cijenu izračuna program po <strong>tvom</strong> cjeniku i tvojim pravilima: relacija, kat bez lifta, šuta, star beton.</p>
+      <div class="cta-row">
+        <a class="btn btn-main" href="https://github.com/FORPEND/ponudo/releases/latest">Preuzmi za Windows <span class="sz">109 MB</span></a>
+        <a class="btn btn-ghost" href="#kako">Kako radi</a>
+      </div>
+    </div>
+    <figure>
+      <video src="promo.mp4" poster="media/poster.jpg" controls playsinline preload="metadata"></video>
+      <figcaption>Pravi posao: kupaonica, 31 m² keramike, treći kat bez lifta, 27 km od baze.</figcaption>
+    </figure>
+  </div>
+</div>
+
+<section id="kako">
+  <div class="wrap">
+    <p class="eyebrow">Tri načina unosa</p>
+    <h2 style="margin-top:12px">Kako god ti je lakše.</h2>
+    <p class="lead" style="margin-top:14px">Ne moraš ništa slikati ako ne želiš. Opis riječima radi jednako dobro, a stavke možeš birati i ručno iz cjenika — to je neograničeno i radi bez interneta.</p>
+
+    <div class="steps">
+      <div class="card">
+        <div class="n">1</div>
+        <h3>Opišeš svojim riječima</h3>
+        <p>„Kupaona, sve rušit i odvoz, keramika 15 m² zid i pod, wc bojler tuš, gletat i bojat.” Majstorski žargon razumije.</p>
+      </div>
+      <div class="card">
+        <div class="n">2</div>
+        <h3>Ili slikaš papir</h3>
+        <p>Zapis s gradilišta kakav jest — zgužvan, rukom pisan. Pročita rukopis i prepozna ime naručitelja ako piše.</p>
+      </div>
+      <div class="card">
+        <div class="n">3</div>
+        <h3>Ili biraš iz cjenika</h3>
+        <p>Tražilica ili kategorije, klik na stavku i upišeš količinu. Bez AI-ja, bez ograničenja, bez interneta.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--surface-2);border-block:1px solid var(--line)">
+  <div class="wrap">
+    <p class="eyebrow">Zašto je cijena uvijek ista</p>
+    <h2 style="margin-top:12px">AI čita. Program računa.</h2>
+    <p class="lead" style="margin-top:14px">To je cijela razlika. Kad AI smije sam odrediti cijenu, isti posao dva puta izađe na dva iznosa — i nikad ne znaš zašto.</p>
+    <div class="split">
+      <div class="half a">
+        <h3>Ostali alati</h3>
+        <strong>AI izmisli iznos</strong>
+        <p>Model procijeni cijenu iz onoga što je vidio na internetu. Jučer 2.400 €, danas 2.900 € za isti posao. Tuđe cijene, tuđa marža.</p>
+      </div>
+      <div class="half b">
+        <h3>PONUDO AI</h3>
+        <strong>Tvoj cjenik množi kod</strong>
+        <p>AI samo kaže <em>što</em> i <em>koliko</em>. Sve množenje radi program, po cijenama koje si sam upisao. Isti posao uvijek daje isti iznos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Ono što kalkulator ne zna</p>
+    <h2 style="margin-top:12px">Zanat je u dodacima.</h2>
+    <p class="lead" style="margin-top:14px">Posao nije skuplji zato što ima više kvadrata, nego zato što je 27 km daleko, na trećem katu bez lifta, i šuta se iznosi rukom. Program to uračuna sam.</p>
+
+    <figure style="margin-top:28px">
+      <img class="shot" src="1-unos.jpg" alt="Ekran programa: unesene stavke kupaonice, desno razrada iznosa s dodacima za kat, šutu, relaciju i koordinaciju više vrsta radova" loading="lazy">
+      <figcaption>Desno se vidi kako nastaje iznos: radovi 1.789,60 €, pa treći kat bez lifta, ručno iznošenje šute, relacija 27 km × 3 dana i koordinacija četiri vrste radova.</figcaption>
+    </figure>
+
+    <div class="sheet">
+      <div class="row"><span>Relacija preko 10 km</span><span class="v">0,50 €/km · oba smjera · po danu</span></div>
+      <div class="row"><span>Kat 2 i više, bez lifta</span><span class="v">+10 % na teške stavke</span></div>
+      <div class="row"><span>Ručno iznošenje šute</span><span class="v">+20 € / m³</span></div>
+      <div class="row"><span>Star ili tvrd beton</span><span class="v">+20 % na rušenja</span></div>
+      <div class="row"><span>U stanu se stanuje</span><span class="v">+10 %</span></div>
+      <div class="row"><span>Hitno ili vikend</span><span class="v">+15 %</span></div>
+      <div class="row"><span>Dvije do tri vrste radova</span><span class="v">+5 %</span></div>
+      <div class="row"><span>Četiri i više vrsta radova</span><span class="v">+10 %</span></div>
+      <div class="row"><span>Najmanji iznos ponude</span><span class="v">150 €</span></div>
+    </div>
+    <p class="note">Ovo su polazne vrijednosti — sve postotke i cijene mijenjaš sam. Dodaci se <strong>tiho uračunaju</strong>: na ponudi koju klijent dobije piše samo faza rada i iznos, nigdje ne stoji „dodatak za kat”.</p>
+  </div>
+</section>
+
+<section style="background:var(--surface-2);border-block:1px solid var(--line)">
+  <div class="wrap">
+    <p class="eyebrow">Ono što klijent dobije</p>
+    <h2 style="margin-top:12px">Ponuda na tvom zaglavlju.</h2>
+    <div class="par">
+      <figure>
+        <img class="shot" src="2-ponuda.jpg" alt="Gotova ponuda u programu, s podacima firme, klijentom i fazama rada" loading="lazy">
+        <figcaption>Tekst faze i cijenu možeš ispraviti rukom prije slanja. Promijeniš li ukupno, faze se proporcionalno prilagode.</figcaption>
+      </figure>
+      <figure>
+        <img class="shot" src="4-pdf.jpg" alt="Ista ponuda kao PDF na punoj A4 stranici" loading="lazy">
+        <figcaption>PDF na punoj A4 stranici, s pravim pretpregledom prije ispisa.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Provjereno na mojim poslovima</p>
+    <h2 style="margin-top:12px">Koliko je blizu?</h2>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Posao</th><th>Moja cijena</th><th>Program</th><th>Razlika</th></tr></thead>
+        <tbody>
+          <tr><td>WC + keramika, 2 m²</td><td class="n">400 €</td><td class="n">369 €</td><td class="d">−8 %</td></tr>
+          <tr><td>Zamjena elektroinstalacije, 54 utičnice</td><td class="n">2.470 €</td><td class="n">2.538 €</td><td class="d">+3 %</td></tr>
+          <tr><td>Kompletna kupaonica</td><td class="n">3.500 €</td><td class="n">3.480 €</td><td class="d">−1 %</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Tri stvarna posla iz moje firme, uspoređena s onim što bih naplatio iz glave. Ne sjeda ti neka brojka — popraviš cijenu u cjeniku i od tada sjeda uvijek.</p>
+
+    <figure style="margin-top:32px">
+      <img class="shot" src="3-cjenik.jpg" alt="Ekran cjenika: popis stavki s jedinicama, cijenama i tipom rada, sve izmjenjivo" loading="lazy">
+      <figcaption>Oko 110 stavki za početak. Svaku cijenu mijenjaš, dodaješ svoje, brišeš što ti ne treba.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section style="background:var(--surface-2);border-block:1px solid var(--line)">
+  <div class="wrap">
+    <div class="buy">
+      <p class="eyebrow">Jedna cijena, bez plaćanja po ponudi</p>
+      <p class="bigprice">20 €<small>godišnje, po korisniku</small></p>
+      <ul class="ticks">
+        <li>Oko 110 stavki u cjeniku za početak — sve mijenjaš, dodaješ svoje, brišeš nepotrebne</li>
+        <li>250 AI čitanja godišnje</li>
+        <li>Opis riječima, fotografija ili ručni odabir iz cjenika</li>
+        <li>Ručni unos neograničen — radi i kad potrošiš kvotu, i bez interneta</li>
+        <li>Ponude se spremaju u arhivu, cijene i stavke možeš ispraviti prije slanja</li>
+        <li>PDF s tvojim zaglavljem, logom i avansom</li>
+        <li>Ponude i arhiva ostaju na tvom računalu</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Preuzimanje</p>
+    <h2 style="margin-top:12px">Prije nego klikneš — pročitaj ovo.</h2>
+    <div class="warn">
+      <h3>Windows će javiti upozorenje. To je normalno.</h3>
+      <p class="screen">Windows protected your PC — Microsoft Defender SmartScreen prevented an unrecognised app from starting.</p>
+      <p>Program nema digitalni certifikat. Košta oko 300 € godišnje i dodat ću ga kad bude dovoljno korisnika da se isplati. Dotad Windows ovo javlja svakom programu koji ga nema, bez obzira je li ispravan.</p>
+      <p><strong>Klikni „More info”, pa „Run anyway”.</strong></p>
+    </div>
+    <ul class="ticks">
+      <li>Raspakiraj zip gdje god hoćeš — nema instalacije</li>
+      <li>Pokreni <span class="num">PONUDO.exe</span></li>
+      <li>Upiši licencni ključ koji si dobio</li>
+    </ul>
+    <div class="cta-row" style="margin-top:30px">
+      <a class="btn btn-main" href="https://github.com/FORPEND/ponudo/releases/latest">Preuzmi PONUDO AI <span class="sz">109 MB · Windows</span></a>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--surface-2);border-top:1px solid var(--line)">
+  <div class="wrap">
+    <p class="eyebrow">Licencni ključ</p>
+    <h2 style="margin-top:12px">Javi se i dobiješ ključ.</h2>
+    <p class="lead" style="margin-top:14px">Nema registracije ni upisivanja kartice. Javiš se, pošaljem ti račun i ključ, i program radi.</p>
+    <div class="kontakt">
+      <a href="mailto:cicakbauinfo@gmail.com"><span>Mail</span> cicakbauinfo@gmail.com</a>
+      <a href="tel:+385953738097"><span>Mobitel</span> +385 95 373 8097</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p><b>Čičak Bau d.o.o.</b> · Samobor</p>
+    <p>PONUDO AI · program za izradu građevinskih ponuda</p>
+  </div>
+</footer>
+
+</body>
+</html>

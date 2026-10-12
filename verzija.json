@@ -1,7 +1,7 @@
 {
-  "verzija": "1.0.2",
-  "datum": "2026-10-12",
-  "opis": "ispravak pokretanja i nova ikona",
+  "verzija": "1.0.3",
+  "datum": "2026-10-13",
+  "opis": "barkod za plaćanje na ponudi",
   "stranica": "https://forpend.github.io/ponudo/",
   "preuzimanje": "https://github.com/FORPEND/ponudo/releases/latest/download/PONUDO-win.zip"
 }

@@ -1,7 +1,7 @@
 {
-  "verzija": "1.0.3",
+  "verzija": "1.0.4",
   "datum": "2026-10-13",
-  "opis": "barkod za plaćanje na ponudi",
+  "opis": "paketi ponuda i prikaz koliko ti je ponuda ostalo",
   "stranica": "https://forpend.github.io/ponudo/",
   "preuzimanje": "https://github.com/FORPEND/ponudo/releases/latest/download/PONUDO-win.zip"
 }

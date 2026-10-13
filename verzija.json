@@ -1,7 +1,7 @@
 {
-  "verzija": "1.0.4",
-  "datum": "2026-10-13",
-  "opis": "paketi ponuda i prikaz koliko ti je ponuda ostalo",
+  "verzija": "1.0.5",
+  "datum": "2026-10-14",
+  "opis": "veći paketi za istu cijenu",
   "stranica": "https://forpend.github.io/ponudo/",
   "preuzimanje": "https://github.com/FORPEND/ponudo/releases/latest/download/PONUDO-win.zip"
 }

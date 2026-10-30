@@ -27,7 +27,7 @@
 
 <h1>Izjava o privatnosti</h1>
 <p class="uvod">Ovdje piše točno koji podaci gdje idu, što se sprema, a što ne.</p>
-<p class="azur">Vrijedi od 12. listopada 2026.</p>
+<p class="azur">Vrijedi od 18. listopada 2026.</p>
 
 <h2>1 · Tko obrađuje podatke</h2>
 <div class="okvir tvrtka">
@@ -69,7 +69,14 @@
   <li>nazivi stavki iz tvog cjenika — <strong>bez cijena</strong>, da AI zna što smije prepoznati</li>
   <li>licencni ključ i oznaka računala</li>
 </ul>
-<p>Ako nijednom ne koristiš AI, nego radove biraš ručno iz cjenika, serveru ne odlazi ništa osim dnevne provjere licence. Ručni unos radi i bez interneta.</p>
+<p>Ako nijednom ne koristiš AI, nego radove biraš ručno iz cjenika, serveru ne odlazi ništa osim dnevne provjere licence i eventualne dojave greške. Ručni unos radi i bez interneta.</p>
+
+<h3>c) Dojava greške</h3>
+<p>Ako programu nešto pukne, šalje se <strong>samo poruka greške</strong>, mjesto u kodu gdje je nastala, verzija programa i verzija Windowsa. To nam služi da grešku nađemo i popravimo, umjesto da pogađamo.</p>
+<div class="okvir">
+  <p><strong>Ne šalje se ništa od tvog sadržaja</strong> — ni cjenik, ni cijene, ni opis posla, ni fotografija, ni ponuda, ni podaci naručitelja. Dojava se šalje najviše jednom u deset sekundi.</p>
+  <p>Ovo možeš isključiti u programu: <em>Moj paket → „Javi mi ako programu nešto pukne”</em>. Program radi jednako i bez toga.</p>
+</div>
 
 <h2>5 · Što se sprema, a što ne</h2>
 <table>
@@ -84,6 +91,8 @@
       datum izdavanja i isteka<br>
       broj kupljenih i iskorištenih ponuda<br>
       datum zadnje provjere<br>
+      verzija programa i verzija Windowsa<br>
+      zadnjih 10 događaja (čitanje uspjelo ili palo, greška u programu)<br>
       bilješka koju upiše prodavatelj
     </td>
     <td>
@@ -97,7 +106,7 @@
   </tr>
 </table>
 <p>Opis i fotografije <strong>prolaze kroz server i nestaju</strong> čim odgovor stigne natrag u program. Ne zapisuju se ni u bazu ni u datoteku.</p>
-<p>Vodi se i zapisnik događaja — izdavanje, aktivacija, produženje, blokada ključa — radi evidencije prodanih paketa. U njemu stoji ključ, naziv firme i vrijeme, i čuva se zadnjih 2000 unosa.</p>
+<p>Vodi se i zapisnik događaja — izdavanje, aktivacija, produženje, blokada ključa, dojavljena greška — radi evidencije prodanih paketa i podrške. U njemu stoji ključ, naziv firme, vrijeme i, kod greške, njezina poruka. Čuva se zadnjih 2000 unosa.</p>
 
 <h2>6 · Gdje se podaci obrađuju</h2>
 <table>
